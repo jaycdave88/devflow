@@ -1,0 +1,43 @@
+services:
+  devflow:
+    build: .
+    container_name: devflow
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # I'm using a named volume for data persistence to avoid permission issues
+      # The initial data will be copied from the container image
+      - devflow_data:/app/backend/db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - devflow-network
+
+  # Optional: Add Jaeger for OpenTelemetry trace collection
+  # Uncomment this section if you want to see traces in Jaeger UI
+  # jaeger:
+  #   image: jaegertracing/all-in-one:latest
+  #   container_name: jaeger
+  #   ports:
+  #     - "16686:16686"  # Jaeger UI
+  #     - "14268:14268"  # Jaeger collector HTTP
+  #   environment:
+  #     - COLLECTOR_OTLP_ENABLED=true
+  #   networks:
+  #     - devflow-network
+
+volumes:
+  devflow_data:
+    driver: local
+
+networks:
+  devflow-network:
+    driver: bridge

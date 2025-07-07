@@ -1,0 +1,14 @@
+[
+  {
+    "key": "new-dashboard",
+    "description": "Enables the new dashboard UI",
+    "enabled": false,
+    "lastUsedAt": null
+  },
+  {
+    "key": "beta-feature-x",
+    "description": "Grants access to beta users",
+    "enabled": false,
+    "lastUsedAt": null
+  }
+]
