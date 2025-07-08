@@ -148,15 +148,3 @@ Restart the server and the new flag will appear in the dashboard.
 **Spans not showing up?**
 - Make sure you’ve installed the required OpenTelemetry packages
 - Check logs from `tracer.js` for startup issues
-
-## Roadmap
-
-The current implementation is a functional MVP. Future improvements could include:
-
-- User authentication and RBAC for flag management  
-- UI support for creating and deleting flags  
-- WebSocket-based real-time updates  
-- Historical analytics and flag usage metrics  
-- Prometheus metrics endpoint  
-- Support for storing flags in a database  
-- GitHub or GitOps integration for flag state sync  
